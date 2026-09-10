@@ -1,0 +1,7 @@
+gene	chrom	locus_start	locus_end	locus_kb	n_sites	sites_per_Mb	n_het	n_hom	dp_median	dp_min	dp_max	dp_ratio_vs_global	deletion_signature
+BUB1B	15	40155984	40226137	70.2	17	242	10	7	40.0	13	57	0.95	no
+CEP57	11	95784965	95842070	57.1	7	123	4	3	41.0	31	56	0.98	no
+TRIP13	5	887849	924357	36.5	3	82	3	0	7.0	7	48	0.17	revisar
+CENATAC	11	118993051	119020811	27.8	20	720	3	17	43.5	24	54	1.04	no
+SLC34A1	5	177373000	177395000	22.0	28	1273	6	22	40.5	10	70	0.96	no
+LZTR1	22	20982000	20999000	17.0	40	2353	31	9	42.5	14	68	1.01	no
