@@ -3,7 +3,7 @@
 **Team:** checkpoint-in-trans
 **Model / approach:** `tiered-panel-biallelic` — phenotype-driven tiered panel with genome-wide
 exonic scan, biallelic prioritisation, ACMG/AMP classification, and orthogonal exclusion analyses
-**Proband:** WGS_EX2312012
+**Proband:** PROBAND01 (VCF sample name `WGS_EX2312012`)
 **Predictions file:** `checkpoint-in-trans_tiered-panel-biallelic.csv`
 
 ---
