@@ -1,7 +1,7 @@
 # Documento de revisión adversarial — MVA Hackathon 2026, Track 2
 
 **Para:** un revisor externo (humano o IA) y el equipo médico del caso.
-**Equipo:** `checkpoint-in-trans` · **Probando:** `PROBAND01` (muestra `WGS_EX2312012`)
+**Equipo:** `checkpoint-in-trans` · **Probando:** `PROBAND01`
 **Repositorio:** https://github.com/tlondonoz/RarekidMVA
 **Fecha de la revisión solicitada:** tras el cierre del paquete de entrega del Track 2.
 
@@ -27,10 +27,20 @@ romperlo**. Concretamente:
 Los entregables que auditas están **en inglés**; este documento está en español para el equipo
 médico. Las afirmaciones críticas se citan literalmente en inglés.
 
-**Aviso de datos:** el caso procede de una copia desidentificada del repositorio del reto. Este
-documento contiene dos coordenadas genómicas que ya son públicas en la submission y en el
-repositorio. No contiene identificadores del paciente. Aun así, si tu organización tiene una política
-sobre datos genómicos, aplícala antes de pegarlo en un servicio que retenga entradas.
+**Aviso de datos.** El caso procede de una copia desidentificada del repositorio del reto, y se
+refiere al probando por la etiqueta del evaluador, `PROBAND01`. Lo que este documento sí contiene:
+las **dos coordenadas genómicas** del par causal y su nomenclatura HGVS. Ya son públicas — van en el
+fichero de predicciones entregado al leaderboard y en el repositorio — pero son datos genómicos de un
+menor real, no una abstracción.
+
+Lo que **no** contiene: nombre, fecha de nacimiento, número de historia, centro, ni ningún dato
+directamente identificativo. Tampoco secuencia (ni VCF, ni FASTQ, ni BAM) ni tablas de genotipo a
+escala de genoma; esa exclusión está documentada en `DATA_AVAILABILITY.md`.
+
+El nombre de muestra del conjunto de datos del reto aparece en otros ficheros del repositorio, donde
+hace falta para trazabilidad; se ha omitido aquí por ser redundante. Si tu organización tiene una
+política sobre datos genómicos, aplícala antes de pegar este documento en un servicio que retenga
+sus entradas.
 
 ---
 
