@@ -1,0 +1,121 @@
+{
+ "stop": "TGA",
+ "tetra": "TGAA",
+ "plus4": "A",
+ "ctx": "CCAGAG[TGA]AGTGCC",
+ "wt_codon": "TTA",
+ "codons_to_stop": 314,
+ "nmd": true,
+ "products": [
+  "W",
+  "C",
+  "R"
+ ],
+ "n_orth": 247,
+ "dist737": {
+  "L": 236,
+  "S": 5,
+  "F": 2,
+  "-": 2,
+  "I": 1,
+  "P": 1
+ },
+ "cons737_gapfree": 96.3,
+ "prod_seen": {
+  "W": 0,
+  "C": 0,
+  "R": 0
+ },
+ "rsa1002": 20.1,
+ "plddt1002": 91.1,
+ "d1002_795": 34.7,
+ "d1002_882": 19.8,
+ "contacts1002": [
+  "LEU1001",
+  "ALA1003",
+  "TRP978",
+  "VAL998",
+  "ASN1004",
+  "ILE1000",
+  "PHE977",
+  "ARG999",
+  "TRP973",
+  "PHE997"
+ ],
+ "rsa737": 10.2,
+ "plddt737": 73.6,
+ "plddt_pk": 81.9,
+ "contacts737": [
+  "LEU731",
+  "LEU734",
+  "PRO735",
+  "GLU736",
+  "SER738",
+  "ALA739",
+  "SER740",
+  "LEU743",
+  "PRO802",
+  "PHE805",
+  "TYR806",
+  "LEU809"
+ ],
+ "tract_total": 28,
+ "tract_pos": [
+  "SM:High-Quality Ligand",
+  "SM:Druggable Family",
+  "PR:Literature",
+  "PR:UniProt Ubiquitination",
+  "PR:Database Ubiquitination"
+ ],
+ "fda": {
+  "DASATINIB": [
+   12,
+   [
+    "Prescription"
+   ]
+  ],
+  "GENTAMICIN": [
+   62,
+   [
+    "Discontinued",
+    "Prescription"
+   ]
+  ],
+  "AMIKACIN": [
+   26,
+   [
+    "Discontinued"
+   ]
+  ],
+  "ATALUREN": [
+   0,
+   []
+  ],
+  "VINCRISTINE": [
+   18,
+   [
+    "Discontinued"
+   ]
+  ],
+  "QUERCETIN": [
+   0,
+   []
+  ]
+ },
+ "lits": {
+  "bubr1_kinase": 35,
+  "mtor": 55,
+  "readthrough": 98,
+  "senolytic": 158,
+  "spindle": 77
+ },
+ "lit_total": 423,
+ "cons737_all": 95.5,
+ "cons1002_all": 91.5,
+ "n1002_dist": {
+  "N": 226,
+  "-": 17,
+  "E": 2,
+  "R": 2
+ }
+}
