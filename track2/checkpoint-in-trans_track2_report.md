@@ -32,9 +32,13 @@ explicitly against a fourth that the literature would otherwise suggest.
 ## 2. Mechanism: what is actually broken
 
 **BubR1 is a pseudokinase.** Of the retrieved abstracts that take a position on the catalytic activity
-of the C-terminal domain, 13 of 16 conclude that the vertebrate protein is catalytically inactive;
-the three that report genuine kinase activity are *Drosophila*, where the enzyme is active
-(PMID 31201382). In vertebrates the catalytic motifs are evolutionarily degenerate and the putative
+of the C-terminal domain, 13 of 16 conclude that the vertebrate protein is catalytically inactive.
+Two of the three dissenting reports are *Drosophila*, where the enzyme is genuinely active — the
+crystallised fly kinase domain adopts a catalytically competent fold (PMID 31201382). The third
+(PMID 24431077) is human, but it does not measure catalysis: it infers BubR1 "kinase activity" from
+the fact that synuclein-γ binding compromises checkpoint function, which the scaffolding model
+explains equally well. So the contrary evidence is two studies in an organism where the enzyme is
+active, plus one human study whose readout does not distinguish catalysis from scaffolding. In vertebrates the catalytic motifs are evolutionarily degenerate and the putative
 catalysis is dispensable for error-free chromosome segregation (PMID 22698286); the domain binds
 nucleotides but cannot deliver catalysis (PMID 26658523). UniProt still annotates EC 2.7.11.1 and an
 active site at Asp882; the primary literature does not support it.
