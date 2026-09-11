@@ -1,4 +1,4 @@
-# checkpoint-in-trans — MVA Hackathon 2026, Track 1
+# checkpoint-in-trans — MVA Hackathon 2026
 
 Variant prioritisation for the *Rare Disease, Real Kid* challenge (Sage Bionetworks, 2026).
 Proband `WGS_EX2312012`. Approach name: `tiered-panel-biallelic`.
@@ -19,15 +19,38 @@ Phase is **not** demonstrated — the variants lie 10,911 bp apart, which short 
 
 Full rationale, evidence and limitations: [`submission/checkpoint-in-trans_track1_report.md`](submission/checkpoint-in-trans_track1_report.md).
 
+## Track 2 — drug repurposing
+
+BubR1 is a vertebrate **pseudokinase**: catalytically dead but essential as a scaffold. Both alleles
+reduce functional dosage, so there is nothing to inhibit — and Open Targets finds no pocket of high
+or medium quality across 28 tractability buckets. That is why no docking was performed.
+
+| | Candidate | Basis | Approved |
+|---|---|---|---|
+| 1 | Dasatinib ± quercetin | BubR1 insufficiency is the founding senolytic model; in `BubR1^H/L1002P` mice — this proband's allelic architecture — progeroid severity tracked with SASP complexity | Dasatinib: yes, pediatric from age 1, incl. with chemotherapy |
+| 2 | Sirolimus / everolimus | mTORC1 hyperactivity in BubR1-mutant mice | Yes |
+| 3 | Translational readthrough | PTC is TGA-A, the most permissive stop class | **No** — ataluren has 0 FDA applications and EU authorisation was not renewed on 28 Mar 2025 |
+| ✗ | SAC-directed synthetic lethality | Argued **against**: its window assumes normal cells keep an intact checkpoint, untrue here |
+
+**The analysis that reordered the ranking.** Readthrough does not restore the wild-type residue — at
+UGA it inserts Trp, Cys or Arg. Across 247 vertebrate orthologs, position 737 is Leu in 236 and
+**none of the three products occurs in any species**, at a site 90% buried. `code/ptc_triage.py`
+packages this triage for any nonsense allele.
+
+Full reasoning: [`track2/checkpoint-in-trans_track2_report.md`](track2/checkpoint-in-trans_track2_report.md).
+**Hypotheses for laboratory follow-up, not treatment recommendations.**
+
 ## Layout
 
 ```
-submission/    predictions CSV, report, methods description form
-code/          annotation and scoring scripts
+submission/    predictions CSV, Track 1 report, methods description form (both tracks)
+code/          annotation, scoring, and the readthrough-triage tool
 resources/     gene panel and reference annotation derived from public databases
-literature/    structured extractions from PubMed abstracts
+literature/    structured extractions from PubMed abstracts (Track 1)
 results/       aggregate statistics and the submitted candidate set
-figures/       supporting figures
+figures/       supporting figures (Track 1)
+track2/        Track 2 report, candidate table, mechanism figure, pitch script
+               and slides, and the Track 2 literature extractions
 ```
 
 ## Pipeline
