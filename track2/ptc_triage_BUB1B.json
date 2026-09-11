@@ -1,0 +1,44 @@
+{
+  "cds_length": 3153,
+  "codon_index": 737,
+  "wt_codon": "TTA",
+  "wt_aa": "L",
+  "mut_codon": "TGA",
+  "creates_stop": true,
+  "stop_codon": "TGA",
+  "permissiveness": "most permissive",
+  "plus4": "A",
+  "tetranucleotide": "TGAA",
+  "near_cognate_products": [
+    "W",
+    "C",
+    "R"
+  ],
+  "context": "CCAGAG[TGA]AGTGCC",
+  "codons_to_natural_stop": 314,
+  "nmd_competent_by_distance": true,
+  "gene": "BUB1B",
+  "orthologs_aligned": 247,
+  "residue_distribution": {
+    "L": 236,
+    "S": 5,
+    "F": 2,
+    "-": 2,
+    "I": 1,
+    "P": 1
+  },
+  "wt_conservation_pct": 96.3,
+  "products_seen_in_orthologs": {
+    "W": 0,
+    "C": 0,
+    "R": 0
+  },
+  "any_product_natural": false,
+  "favourable": [
+    "stop codon TGA is the most permissive class"
+  ],
+  "unfavourable": [
+    "PTC is NMD-competent, so transcript availability limits yield",
+    "none of ['W', 'C', 'R'] occurs at this position in 247 orthologs (wild-type residue 96.3% conserved)"
+  ]
+}
