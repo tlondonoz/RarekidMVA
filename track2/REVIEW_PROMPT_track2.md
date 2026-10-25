@@ -7,6 +7,24 @@
 
 ---
 
+> **Estado de este documento.** Describe el borrador **anterior** a la revisión externa. Esa revisión
+> se realizó y sus hallazgos están aplicados en `checkpoint-in-trans_track2_report.md`, que es la
+> versión vigente. Cambios sustantivos introducidos: se corrigió una cita mal atribuida (PMID 42098153
+> es un estudio de tuberculosis murina, no un modelo de BubR1) y se sustituyó por las referencias
+> correctas en el modelo BubR1 (PMID 22048312, 18516091), con PMID 23602569 como contrapeso; se
+> reordenaron las propuestas, con la inhibición de mTOR en primer lugar por los datos aleatorizados en
+> rabdomiosarcoma pediátrico (PMID 31513481, 38936378) y una propuesta de vigilancia renal por delante
+> de todos los fármacos (PMID 31081598, 42595739, 39264246); la afirmación "sin bolsillo druggable"
+> pasó de negativo a **no evaluado**, por derivarse de estructuras experimentales inexistentes para
+> este dominio; el criterio de competencia para NMD se cambió a la regla de los 50 nt sobre la última
+> unión exón-exón (exón 17 de 23, 747 nt aguas arriba); y el argumento de volumen contra los productos
+> de lectura a través dejó de ser uniforme — solo triptófano excede el rango tolerado, mientras
+> cisteína y arginina no quedan excluidas.
+>
+> Se conserva por transparencia del proceso de auditoría. **No es la versión a evaluar.**
+
+---
+
 ## 0. Instrucciones para quien revisa
 
 Tu tarea **no** es mejorar la redacción ni confirmar que el trabajo parece sólido. Es **intentar

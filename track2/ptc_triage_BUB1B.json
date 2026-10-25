@@ -16,7 +16,10 @@
   ],
   "context": "CCAGAG[TGA]AGTGCC",
   "codons_to_natural_stop": 314,
-  "nmd_competent_by_distance": true,
+  "fraction_of_cds": 0.701,
+  "nmd_note": "NMD competence depends on distance to the LAST exon-exon junction (~50-55 nt rule). Supply --last-junction-nt to evaluate it properly; the CDS fraction below is only a bound.",
+  "nt_upstream_of_last_junction": 747,
+  "nmd_competent": true,
   "gene": "BUB1B",
   "orthologs_aligned": 247,
   "residue_distribution": {
@@ -27,18 +30,45 @@
     "I": 1,
     "P": 1
   },
-  "wt_conservation_pct": 96.3,
+  "wt_residue": "L",
+  "wt_conservation_pct_gapfree": 96.3,
+  "wt_conservation_pct": 95.5,
   "products_seen_in_orthologs": {
     "W": 0,
     "C": 0,
     "R": 0
   },
   "any_product_natural": false,
+  "observed_substitution_volumes": {
+    "S": -77.7,
+    "F": 23.2,
+    "I": 0.0,
+    "P": -54.0
+  },
+  "product_volume_vs_observed": {
+    "W": {
+      "delta_volume_A3": 61.1,
+      "verdict": "no tolerated substitution of this magnitude at this position"
+    },
+    "C": {
+      "delta_volume_A3": -58.2,
+      "verdict": "not excluded by volume (a larger cavity is tolerated: -77.7)"
+    },
+    "R": {
+      "delta_volume_A3": 6.7,
+      "verdict": "not excluded by volume (a larger insertion is tolerated: +23.2)"
+    }
+  },
+  "dominant_product": "unknown \u2014 relative near-cognate insertion frequencies are not measured for this sequence context",
   "favourable": [
     "stop codon TGA is the most permissive class"
   ],
   "unfavourable": [
     "PTC is NMD-competent, so transcript availability limits yield",
-    "none of ['W', 'C', 'R'] occurs at this position in 247 orthologs (wild-type residue 96.3% conserved)"
+    "none of ['W', 'C', 'R'] occurs at this position in 247 orthologs (wild-type residue 95.5% conserved)"
+  ],
+  "caution": [
+    "C is not excluded by volume \u2014 a larger cavity (-77.7 A^3) is tolerated at this position",
+    "R is not excluded by volume \u2014 a larger insertion (+23.2 A^3) is tolerated at this position"
   ]
 }

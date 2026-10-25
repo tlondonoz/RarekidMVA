@@ -29,6 +29,10 @@ NEAR_COGNATE = {"TGA": ["W", "C", "R"], "TAG": ["Q", "Y", "W", "K", "E"],
                 "TAA": ["Q", "Y", "K", "E"]}
 # readthrough permissiveness of the stop codon itself, most to least
 CODON_RANK = {"TGA": "most permissive", "TAG": "intermediate", "TAA": "least permissive"}
+# side-chain volumes (A^3), Zamyatnin 1972
+VOLUME = {"A": 88.6, "R": 173.4, "N": 114.1, "D": 111.1, "C": 108.5, "Q": 143.8, "E": 138.4,
+          "G": 60.1, "H": 153.2, "I": 166.7, "L": 166.7, "K": 168.6, "M": 162.9, "F": 189.9,
+          "P": 112.7, "S": 89.0, "T": 116.1, "W": 227.8, "Y": 193.6, "V": 140.0}
 CODON_TABLE = {}
 for i, b1 in enumerate("TCAG"):
     for b2 in "TCAG":
@@ -109,6 +113,8 @@ def main():
                     help="1-based position in the CDS of the substituted base")
     ap.add_argument("--alt", required=True, help="alternate base")
     ap.add_argument("--uniprot", help="UniProt accession; enables the ortholog-tolerance step")
+    ap.add_argument("--last-junction-nt", type=int, default=None,
+                    help="CDS coordinate of the last exon-exon junction; enables the NMD rule")
     ap.add_argument("--json-out")
     a = ap.parse_args()
 
@@ -130,9 +136,20 @@ def main():
                tetranucleotide=(mut + plus4) if plus4 else None,
                near_cognate_products=NEAR_COGNATE[mut],
                context=f"{cds[codon_i*3-6:codon_i*3]}[{mut}]{cds[(codon_i+1)*3:(codon_i+1)*3+6]}")
-    # NMD: last codon is the natural stop; PTC is NMD-competent if well upstream.
+    # NMD competence is set by the PTC's position relative to the LAST exon-exon
+    # junction (the canonical ~50-55 nt rule), not by distance to the natural stop.
+    # Without exon coordinates we can only bound it: a PTC in the 5' portion of a
+    # multi-exon CDS is almost certainly >50 nt upstream of the final junction.
     out["codons_to_natural_stop"] = (len(cds) // 3) - aa_pos
-    out["nmd_competent_by_distance"] = out["codons_to_natural_stop"] * 3 > 50
+    out["fraction_of_cds"] = round(aa_pos / (len(cds) // 3), 3)
+    out["nmd_note"] = ("NMD competence depends on distance to the LAST exon-exon junction "
+                       "(~50-55 nt rule). Supply --last-junction-nt to evaluate it properly; "
+                       "the CDS fraction below is only a bound.")
+    if a.last_junction_nt is not None:
+        out["nt_upstream_of_last_junction"] = a.last_junction_nt - a.cds_pos
+        out["nmd_competent"] = out["nt_upstream_of_last_junction"] > 50
+    else:
+        out["nmd_competent"] = None
 
     if a.uniprot:
         gene, human, n_aln, counts = ortholog_residues(a.uniprot, [aa_pos])
@@ -142,14 +159,18 @@ def main():
         out["gene"] = gene
         out["orthologs_aligned"] = n_aln
         out["residue_distribution"] = dict(sorted(c.items(), key=lambda kv: -kv[1]))
-        out["wt_conservation_pct"] = round(100 * c.get(wt_aa, 0) / max(total, 1), 1)
+        out["wt_residue"] = wt_aa
+        out["wt_conservation_pct_gapfree"] = round(100 * c.get(wt_aa, 0) / max(total, 1), 1)
+        out["wt_conservation_pct"] = round(100 * c.get(wt_aa, 0) / max(n_aln, 1), 1)
         out["products_seen_in_orthologs"] = {p: c.get(p, 0) for p in NEAR_COGNATE[mut]}
         out["any_product_natural"] = any(c.get(p, 0) for p in NEAR_COGNATE[mut])
 
     fav = [f"stop codon {mut} is the {CODON_RANK[mut]} class"]
-    unfav = []
-    if out.get("nmd_competent_by_distance"):
+    unfav, caution = [], []
+    if out.get("nmd_competent"):
         unfav.append("PTC is NMD-competent, so transcript availability limits yield")
+    elif out.get("nmd_competent") is None:
+        caution.append("NMD competence not evaluated (no --last-junction-nt given)")
     if a.uniprot:
         if out["any_product_natural"]:
             fav.append("at least one readthrough product occurs naturally at this position")
@@ -157,8 +178,36 @@ def main():
             unfav.append(f"none of {NEAR_COGNATE[mut]} occurs at this position in "
                          f"{out['orthologs_aligned']} orthologs "
                          f"(wild-type residue {out['wt_conservation_pct']}% conserved)")
+        # Absence from orthologs is not the whole story: compare each product's volume
+        # change against the LARGEST change actually tolerated at this position. A
+        # product smaller in magnitude than an observed substitution is not excluded.
+        c = out["residue_distribution"]
+        wt_aa = out["wt_residue"]
+        obs = {k: round(VOLUME[k] - VOLUME[wt_aa], 1)
+               for k in c if k not in ("-", wt_aa) and k in VOLUME}
+        worst_shrink = min(list(obs.values()) + [0.0])
+        worst_grow = max(list(obs.values()) + [0.0])
+        pv = {}
+        for p in NEAR_COGNATE[mut]:
+            dv = round(VOLUME[p] - VOLUME[wt_aa], 1)
+            if dv < 0 and dv > worst_shrink:
+                verdict = f"not excluded by volume (a larger cavity is tolerated: {worst_shrink:+.1f})"
+                caution.append(f"{p} is not excluded by volume — a larger cavity "
+                               f"({worst_shrink:+.1f} A^3) is tolerated at this position")
+            elif dv > 0 and dv < worst_grow:
+                verdict = f"not excluded by volume (a larger insertion is tolerated: {worst_grow:+.1f})"
+                caution.append(f"{p} is not excluded by volume — a larger insertion "
+                               f"({worst_grow:+.1f} A^3) is tolerated at this position")
+            else:
+                verdict = "no tolerated substitution of this magnitude at this position"
+            pv[p] = {"delta_volume_A3": dv, "verdict": verdict}
+        out["observed_substitution_volumes"] = obs
+        out["product_volume_vs_observed"] = pv
+        out["dominant_product"] = ("unknown — relative near-cognate insertion frequencies "
+                                   "are not measured for this sequence context")
     out["favourable"] = fav
     out["unfavourable"] = unfav
+    out["caution"] = caution
     print(json.dumps(out, indent=2))
     if a.json_out:
         json.dump(out, open(a.json_out, "w"), indent=2)

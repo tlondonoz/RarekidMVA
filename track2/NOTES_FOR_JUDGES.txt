@@ -1,0 +1,27 @@
+Notes for judges — checkpoint-in-trans, Track 2
+
+Three things worth knowing before you open the report.
+
+1. We rank a NON-DRUG intervention first. Serial renal ultrasound for Wilms tumour has a better
+   benefit-to-risk ratio than any of our three drug proposals, and the child is already under renal
+   follow-up for nephrocalcinosis, so the incremental cost is near zero. We put it ahead of the
+   pharmacology deliberately rather than omit it.
+
+2. We argue explicitly AGAINST a strategy the literature would otherwise suggest. Aneuploid tumours
+   depend on their residual spindle checkpoint, so KIF18A and related inhibitors are the standard
+   play. That window assumes normal cells keep an intact checkpoint — which is false in constitutional
+   BUB1B insufficiency, where perturbing the residual checkpoint could raise aneuploidy in healthy
+   tissue and so increase tumour risk. Section 8.
+
+3. Our methodological contribution produced a NEGATIVE result about our own favourite candidate.
+   Readthrough does not restore the wild-type residue; at UGA it inserts Trp, Cys or Arg. We asked
+   whether BubR1 tolerates the product at position 737 across 247 vertebrate orthologs, and the answer
+   demoted translational readthrough from first to third. The same analysis also shows the exclusion
+   is not uniform — only Trp exceeds the volume change this position tolerates — and we report that
+   against our own interest. The triage ships as ptc_triage.py and generalises to any nonsense allele.
+
+The report separates "not evaluated" from "negative" throughout; where we could not measure something
+we say so rather than infer it. The repository carries the code, the 423 structured literature
+extractions, and a data-availability statement explaining why no patient sequence data is included.
+
+Nothing in the submission is a treatment recommendation.
